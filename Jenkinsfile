@@ -49,7 +49,11 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "frontend.yaml", kubeconfigId: "kube")
+          sh '''
+                kubectl apply -f k8s/mysql-deployment.yaml
+                kubectl apply -f k8s/flask-deployment.yaml
+                kubectl get pods
+                ...
         }
       }
     }
