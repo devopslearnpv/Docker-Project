@@ -47,12 +47,15 @@ pipeline {
         }
       }
     stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "frontend.yaml", kubeconfigId: "kube")
+    steps {
+        withEnv(["KUBECONFIG=/var/lib/jenkins/.kube/config"]) {
+            sh '''
+                kubectl apply -f frontend.yaml
+                kubectl get all
+            '''
         }
-      }
     }
+}
 
   }
 
