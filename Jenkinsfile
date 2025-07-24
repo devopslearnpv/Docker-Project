@@ -46,14 +46,12 @@ pipeline {
         sh 'docker push "docker.io/prashanthvedarathna/mysql:$BUILD_NUMBER"'
         }
       }
-    stage('Deploy App') {
-      steps {
-        script {
-          sh '''
-                kubectl apply -f k8s/mysql-deployment.yaml
-                kubectl apply -f k8s/flask-deployment.yaml
-                kubectl get pods
-                ...
+    stage('Deploy App to Kubernetes') {
+            steps {
+                sh '''
+                kubectl apply -f frontend.yaml
+                kubectl get all
+                '''
         }
       }
     }
