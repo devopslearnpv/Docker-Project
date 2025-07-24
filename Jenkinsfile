@@ -1,8 +1,8 @@
 pipeline {
 
   environment {
-    registry = "docker.io/cubensquare/flask"
-    registry_mysql = "docker.io/cubensquare/mysql"
+    registry = "docker.io/prashanthvedarathna/flask"
+    registry_mysql = "docker.io/prashanthvedarathna/mysql"
     dockerImage = ""
   }
 
@@ -42,8 +42,8 @@ pipeline {
    }
    stage('Build mysql image') {
      steps{
-       sh 'docker build -t "docker.io/cubensquare/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
-        sh 'docker push "docker.io/cubensquare/mysql:$BUILD_NUMBER"'
+       sh 'docker build -t "docker.io/prashanthvedarathna/mysql:$BUILD_NUMBER"  "$WORKSPACE"/mysql'
+        sh 'docker push "docker.io/prashanthvedarathna/mysql:$BUILD_NUMBER"'
         }
       }
     stage('Deploy App') {
